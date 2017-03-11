@@ -19,11 +19,11 @@ public class LightBehaviour : MonoBehaviour {
 		sunset = new GameTime (-1, -1, 20, 0, 0);
 		twilight = new GameTime (-1, -1, 23, 59, 59);
 
-		foreach (Transform child in GameObject.Find("DayLights").transform) {
-		}
+		//foreach (Transform child in GameObject.Find("DayLights").transform) {
+		//}
 
-		foreach (Transform child in GameObject.Find("NightLights").transform) {
-		}
+		//foreach (Transform child in GameObject.Find("NightLights").transform) {
+		//}
 	}
 	
 	// Update is called once per frame

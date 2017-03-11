@@ -27,6 +27,11 @@ public class CircleMenu : MonoBehaviour, Navigatable {
     private int offset = 0;
     private Vector3 center;
 
+    void Awake()
+    {
+        Game.instance().actionMenu = this;
+    }
+
 	// Use this for initialization
 	void Start () {
         // Record the center (cause it changes when we move buttons around)

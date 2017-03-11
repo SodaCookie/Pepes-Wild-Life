@@ -3,21 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class House : MonoBehaviour, Interactable {
-    private List<Interaction> genericInteractions = new List<Interaction>();
+public class House : MonoBehaviour, Clickable {
+    public List<GameObject> genericMenuButtons = new List<GameObject>();
 
     void Awake()
     {
-        populateGenericInteractions();
+        Game.instance().house = this; // Register me as the house
     }
 
-    public List<Interaction> getInteractions()
+    public List<GameObject> getButtons()
     {
-        return new List<Interaction>(genericInteractions);
-    }
-	
-	void populateGenericInteractions()
-    {
-        // Add interactions that should work on the house
+        return new List<GameObject>(genericMenuButtons);
     }
 }

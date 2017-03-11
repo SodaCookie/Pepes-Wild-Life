@@ -14,7 +14,7 @@ public class MenuButton : MonoBehaviour {
         myUIButton = gameObject.GetComponent<Button>();
         myUIButton.onClick.AddListener(OnClickHandler);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		// TODO: Visually mask unclickable buttons

@@ -12,7 +12,7 @@ public class MoveToGoal : PepeGoal {
 	
 	public override bool run(PepeBehaviour pepe) {
 		// Simply moves pepe to the goal
-		pepe.transform.position = Vector3.MoveTowards(pepe.transform.position, target.transform.position, pepe.speed);
+		pepe.transform.position = Vector3.MoveTowards(pepe.transform.position, target.transform.position, pepe.speed * Time.deltaTime);
 		if (pepe.transform.position == target.transform.position) {
 			completed = true;
 		}

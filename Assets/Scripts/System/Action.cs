@@ -6,14 +6,20 @@ public class Action {
     // You should set these in the constructor of the derived class
     protected float entertainmentValue = 0;
     protected float suspiciousness = 0;
+    protected float cost = 0;
 
     public Action() { }
 
-    public void execute(Game game)
+    public bool execute(Game game)
     {
-        game.addEntertainment(entertainmentValue);
-        game.addSuspicion(suspiciousness);
-        performAction(game);
+        if (game.getCurrentWealth() > cost)
+        {
+            game.addEntertainment(entertainmentValue);
+            game.addSuspicion(suspiciousness);
+            performAction(game);
+            return true;
+        }
+        return false;
     }
 	
     protected virtual void performAction(Game game)

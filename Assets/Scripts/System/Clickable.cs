@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Interactable {
-    List<Interaction> getInteractions();
+public interface Clickable {
+    List<GameObject> getButtons();
 }

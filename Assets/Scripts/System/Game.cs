@@ -9,7 +9,9 @@ public class Game : MonoBehaviour {
 
     // Public
     [HideInInspector]
-    public House house;
+    public House house; // Set on awake by the object itself
+    public PepeBehaviour pepe; // Set on awake by the object itself
+    public CircleMenu actionMenu; // Set on awake by the object itself
 
     // Private
     // State variables
