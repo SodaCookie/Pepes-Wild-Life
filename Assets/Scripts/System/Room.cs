@@ -6,6 +6,7 @@ using UnityEngine;
 public class Room : MonoBehaviour, Interactable
 {
     private List<Interaction> genericInteractions = new List<Interaction>();
+	public string type = "room";
 
     void Awake()
     {
