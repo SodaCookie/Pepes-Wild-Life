@@ -25,11 +25,19 @@ public class CircleMenu : MonoBehaviour, Navigatable {
     // Private
     private List<MenuButton> displayedMenuButtons = new List<MenuButton>();
     private int offset = 0;
+    private Vector3 center;
 
 	// Use this for initialization
 	void Start () {
+        // Record the center (cause it changes when we move buttons around)
+        center = gameObject.transform.position;
+        center.z = 0;
+
+        // Remove all the buttons fromt he scene
         foreach (MenuButton b in menuButtons)
             b.gameObject.SetActive(false);
+
+        // Update the display to redisplay the correct ones
         UpdateDisplayedMenuButtons();
 	}
 
@@ -90,17 +98,12 @@ public class CircleMenu : MonoBehaviour, Navigatable {
     // Draw the buttons to the correct positions
     void UpdateMenuButtonPositions()
     {
-        Debug.Log(offset);
         int index = 0;
         float range = maxAngle - minAngle;
         float degPerIndex = range / (displayedMenuButtons.Count - 1); // -1 because one button will be at position 0
 
         foreach (MenuButton mb in displayedMenuButtons)
         {
-            // Get the center
-            Vector3 center = gameObject.transform.position;
-            center.z = 0;
-
             // Calculate the angle for this button
             float angle = minAngle + (degPerIndex * index);
 

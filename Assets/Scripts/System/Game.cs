@@ -18,6 +18,7 @@ public class Game : MonoBehaviour {
     private GameTime lastTimedEventsExecution;
     private float currentEntertainment = 0;
     private float currentSuspicion = 0;
+    private float currentWealth = 1000;
 
     // list of timed events
     private List<TimedEvent> timedEvents = new List<TimedEvent>();
@@ -96,6 +97,21 @@ public class Game : MonoBehaviour {
         to_ret.minute = curTimeInSeconds / GameTime.SECONDS_PER_MINUTE;
         to_ret.second = curTimeInSeconds % GameTime.SECONDS_PER_MINUTE;
         return to_ret;
+    }
+
+    public float getCurrentSuspicion()
+    {
+        return currentSuspicion;
+    }
+
+    public float getCurrentEntertainment()
+    {
+        return currentEntertainment;
+    }
+
+    public float getCurrentWealth()
+    {
+        return currentWealth;
     }
 
     public float realSecondsToGameSeconds(float realSeconds)

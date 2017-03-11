@@ -16,6 +16,15 @@ public class GameTime {
 
     public GameTime() { }
 
+    public GameTime(GameTime copy)
+    {
+        this.era = copy.era;
+        this.day = copy.day;
+        this.hour = copy.hour;
+        this.minute = copy.minute;
+        this.second = copy.second;
+    }
+
     public GameTime(int era, int day, int hour, int minute, int second)
     {
         this.era = era;
@@ -24,6 +33,38 @@ public class GameTime {
         this.minute = minute;
         this.second = second;
     }
+
+    public void addSeconds(int seconds)
+    {
+        second += seconds;
+        minute += second / SECONDS_PER_MINUTE;
+        second = second % SECONDS_PER_MINUTE;
+        hour += minute / MINUTES_PER_HOUR;
+        minute = minute % MINUTES_PER_HOUR;
+        day += hour / HOURS_PER_DAY;
+        hour = hour & HOURS_PER_DAY;
+        era += day / DAYS_PER_ERA;
+        day = day % DAYS_PER_ERA;
+    }
+
+    public void addMinutes(int minutes)
+    {
+        int seconds = minutes * SECONDS_PER_MINUTE;
+        addSeconds(seconds);
+    }
+
+    public void addHours(int hours)
+    {
+        int minutes = hours * MINUTES_PER_HOUR;
+        addMinutes(minutes);
+    }
+
+    public void addDays(int days)
+    {
+        int hours = days * HOURS_PER_DAY;
+        addHours(hours);
+    }
+
 
     // Operator overrides
     public static bool operator ==(GameTime g1, GameTime g2)
@@ -76,6 +117,21 @@ public class GameTime {
         g.era += g.day / DAYS_PER_ERA;
         g.day = g.day % DAYS_PER_ERA;
         return g;
+    }
+
+    public static GameTime operator +(GameTime g, int seconds)
+    {
+        GameTime g_new = new GameTime(g);
+        g_new.second+= seconds;
+        g_new.minute += g_new.second / SECONDS_PER_MINUTE;
+        g_new.second = g_new.second % SECONDS_PER_MINUTE;
+        g_new.hour += g_new.minute / MINUTES_PER_HOUR;
+        g_new.minute = g_new.minute % MINUTES_PER_HOUR;
+        g_new.day += g_new.hour / HOURS_PER_DAY;
+        g_new.hour = g_new.hour & HOURS_PER_DAY;
+        g_new.era += g_new.day / DAYS_PER_ERA;
+        g_new.day = g_new.day % DAYS_PER_ERA;
+        return g_new;
     }
 
     public override bool Equals(object obj)
