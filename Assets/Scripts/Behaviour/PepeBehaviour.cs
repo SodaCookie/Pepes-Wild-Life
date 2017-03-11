@@ -8,13 +8,13 @@ public class PepeBehaviour : MonoBehaviour {
 	public float speed;
 	public string room = "outside";
 	public LinkedList<PepeGoal> goals;
-	private GameObject speech_bubble;
+	public GameObject speech_bubble;
 
 	// Use this for initialization
 	void Awake () {
-		speech_bubble = GameObject.Find ("Speech Bubble");
 		goals = new LinkedList<PepeGoal> ();
-		AddGoal (new WanderGoal());
+		AddGoal (new WanderGoal(0.1f));
+//		AddGoal (new MoveToNodeGoal(GameObject.Find("Away").GetComponent<Node>()));
 	}
 
 	// Update is called once per frame
@@ -56,8 +56,8 @@ public class PepeBehaviour : MonoBehaviour {
 	}
 
 	public void PostMessage(string message) {
-		speech_bubble.GetComponentInChildren<Text> ().text = message;
 		speech_bubble.SetActive (true);
+		speech_bubble.GetComponentInChildren<Text> ().text = message;
 	}
 
 	public void RemoveMessage() {

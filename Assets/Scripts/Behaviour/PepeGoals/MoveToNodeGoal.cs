@@ -9,9 +9,11 @@ public class MoveToNodeGoal : PepeGoal {
 	private List<int> path;
 	private Pathing pathing;
 	private MoveToGoal currentGoal;
+	private float speed;
 
-	public MoveToNodeGoal(Node target) {
+	public MoveToNodeGoal(Node target, float speed = 0.02f) {
 		this.target = target;
+		this.speed = speed;
 	}
 
 	public override void initialize (PepeBehaviour pepe) {
@@ -63,6 +65,7 @@ public class MoveToNodeGoal : PepeGoal {
 
 	public override bool run(PepeBehaviour pepe) {
 		if (dirty) {
+			pepe.speed = speed;
 			search (pepe);
 			dirty = false;
 		}

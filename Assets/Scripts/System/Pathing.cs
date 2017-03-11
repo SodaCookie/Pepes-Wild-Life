@@ -33,9 +33,10 @@ public class Pathing : MonoBehaviour {
 		connections.Add (11, new int[]{17});
 		connections.Add (12, new int[]{10});
 		connections.Add (13, new int[]{10});
-		connections.Add (14, new int[]{1});
+		connections.Add (14, new int[]{1, 18});
 		connections.Add (15, new int[]{5, 6});
 		connections.Add (16, new int[]{8, 10});
 		connections.Add (17, new int[]{6, 11});
+		connections.Add (18, new int[]{14});
 	}
 }
