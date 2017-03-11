@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pepe's Wild Life", "Assembly-CSharp-firstpass.csproj", "{227212E5-1A04-A6D6-5D54-BA748C1D3386}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pepe's Wild Life", "Assembly-CSharp.csproj", "{DCABF26C-A74A-A946-AA24-8800A826B670}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pepe's Wild Life", "Assembly-CSharp-Editor-firstpass.csproj", "{26D78462-DDF8-9023-C603-902FEF0B5C67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{227212E5-1A04-A6D6-5D54-BA748C1D3386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{227212E5-1A04-A6D6-5D54-BA748C1D3386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{227212E5-1A04-A6D6-5D54-BA748C1D3386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{227212E5-1A04-A6D6-5D54-BA748C1D3386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCABF26C-A74A-A946-AA24-8800A826B670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCABF26C-A74A-A946-AA24-8800A826B670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCABF26C-A74A-A946-AA24-8800A826B670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCABF26C-A74A-A946-AA24-8800A826B670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26D78462-DDF8-9023-C603-902FEF0B5C67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26D78462-DDF8-9023-C603-902FEF0B5C67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26D78462-DDF8-9023-C603-902FEF0B5C67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26D78462-DDF8-9023-C603-902FEF0B5C67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
