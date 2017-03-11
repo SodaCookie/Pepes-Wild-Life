@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Node : MonoBehaviour {
 
+	[HideInInspector] public int index;
 	public string node = "room";
 }

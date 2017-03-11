@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveToGoal : PepeGoal {
 
-	GameObject target;
+	private GameObject target;
 
 	public MoveToGoal(GameObject target) {
 		this.target = target;
@@ -17,5 +17,9 @@ public class MoveToGoal : PepeGoal {
 			completed = true;
 		}
 		return true;
+	}
+
+	public override void interrupt(PepeGoal goal) {
+		completed = true;
 	}
 }

@@ -8,8 +8,6 @@ public class PepeBehaviour : MonoBehaviour {
 	public string room = "outside";
 	public LinkedList<PepeGoal> goals;
 
-	private GameObject movingGoal;
-
 	// Use this for initialization
 	void Awake () {
 		goals = new LinkedList<PepeGoal> ();
@@ -46,6 +44,9 @@ public class PepeBehaviour : MonoBehaviour {
 		}
 	}
 
-	void setMoveGoal() {
+	void AddGoal(PepeGoal goal) {
+		goals.Last.Value.interrupt (goal);
+		goals.AddLast (goal);
+		goal.initialize ();
 	}
 }
