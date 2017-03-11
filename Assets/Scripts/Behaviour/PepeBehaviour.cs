@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PepeBehaviour : MonoBehaviour {
 
 	public float speed;
 	public string room = "outside";
 	public LinkedList<PepeGoal> goals;
+	private GameObject speech_bubble;
 
 	// Use this for initialization
 	void Awake () {
+		speech_bubble = GameObject.Find ("Speech Bubble");
 		goals = new LinkedList<PepeGoal> ();
 		AddGoal (new WanderGoal());
 	}
@@ -50,5 +53,14 @@ public class PepeBehaviour : MonoBehaviour {
 		}
 		goals.AddFirst (goal);
 		goal.initialize (this);
+	}
+
+	public void PostMessage(string message) {
+		speech_bubble.GetComponentInChildren<Text> ().text = message;
+		speech_bubble.SetActive (true);
+	}
+
+	public void RemoveMessage() {
+		speech_bubble.SetActive (false);
 	}
 }
