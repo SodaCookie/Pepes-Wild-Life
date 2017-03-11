@@ -13,7 +13,7 @@ public class PepeBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		goals = new LinkedList<PepeGoal> ();
-		AddGoal (new WanderGoal(0.02f));
+		AddGoal (new WanderGoal(0.1f));
 //		AddGoal (new MoveToNodeGoal(GameObject.Find("Away").GetComponent<Node>()));
 	}
 
