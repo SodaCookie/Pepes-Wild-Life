@@ -23,12 +23,6 @@ public class Game : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         lastTimedEventsExecution = new GameTime();
-
-        // TEST
-        GameTime sched = new GameTime(-1, -1, -1, -1, -1);
-        TimedEvent test = new TimedEvent(sched, -1);
-        scheduleTimedEvent(test);
-        // TEST
 	}
 	
 	// Update is called once per frame
