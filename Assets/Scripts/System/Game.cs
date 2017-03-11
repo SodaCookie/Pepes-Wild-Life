@@ -22,6 +22,11 @@ public class Game : MonoBehaviour {
     // list of timed events
     private List<TimedEvent> timedEvents = new List<TimedEvent>();
 
+    public static Game instance()
+    {
+        return GameObject.Find("GameSystem").GetComponent<Game>();
+    }
+
 	// Use this for initialization
 	void Start () {
         lastTimedEventsExecution = new GameTime();

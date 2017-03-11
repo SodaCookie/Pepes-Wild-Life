@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
 public class MenuButton : MonoBehaviour {
-    public bool clickable;
+    public bool clickable = true;
 
     private Button myUIButton;
 

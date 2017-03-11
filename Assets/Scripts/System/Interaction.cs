@@ -5,9 +5,9 @@ using UnityEngine;
 public class Interaction {
     public Interaction() { }
 
-    public void execute(Game game)
+    public void execute()
     {
-        performInteraction(game);
+        performInteraction(Game.instance());
     }
 
     protected virtual void performInteraction(Game game)

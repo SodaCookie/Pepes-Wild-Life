@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Action {
     // You should set these in the constructor of the derived class
-    private float entertainmentValue = 0;
-    private float suspiciousness = 0;
+    protected float entertainmentValue = 0;
+    protected float suspiciousness = 0;
 
     public Action() { }
 

@@ -23,11 +23,13 @@ public class CircleMenu : MonoBehaviour, Navigatable {
     public List<MenuButton> menuButtons = new List<MenuButton>();
 
     // Private
-    public List<MenuButton> displayedMenuButtons = new List<MenuButton>();
+    private List<MenuButton> displayedMenuButtons = new List<MenuButton>();
     private int offset = 0;
 
 	// Use this for initialization
 	void Start () {
+        foreach (MenuButton b in menuButtons)
+            b.gameObject.SetActive(false);
         UpdateDisplayedMenuButtons();
 	}
 
@@ -54,13 +56,14 @@ public class CircleMenu : MonoBehaviour, Navigatable {
         prevMenuButton.clickable = true;
         if (offset <= 0)
             prevMenuButton.clickable = false;
+        prevMenuButton.gameObject.SetActive(true);
         displayedMenuButtons.Add(prevMenuButton);
 
         // Add the buttons currently displayed
         int i;
         for (i = offset; i < offset + numMenuButtons; i++)
         {
-            displayedMenuButtons[i].gameObject.SetActive(true);
+            menuButtons[i].gameObject.SetActive(true); // +1 cause we ignore the previous button
             displayedMenuButtons.Add(menuButtons[i]);
         }
 
@@ -68,6 +71,7 @@ public class CircleMenu : MonoBehaviour, Navigatable {
         nextMenuButton.clickable = true;
         if (offset + numMenuButtons >= menuButtons.Count)
             nextMenuButton.clickable = false;
+        nextMenuButton.gameObject.SetActive(true);
         displayedMenuButtons.Add(nextMenuButton);
 
         UpdateMenuButtonPositions();
@@ -86,6 +90,7 @@ public class CircleMenu : MonoBehaviour, Navigatable {
     // Draw the buttons to the correct positions
     void UpdateMenuButtonPositions()
     {
+        Debug.Log(offset);
         int index = 0;
         float range = maxAngle - minAngle;
         float degPerIndex = range / (displayedMenuButtons.Count - 1); // -1 because one button will be at position 0
@@ -112,13 +117,13 @@ public class CircleMenu : MonoBehaviour, Navigatable {
 
     int getNumberOfMenuButtonsDisplayed()
     {
-        return Mathf.Max(pageSize, menuButtons.Count);
+        return Mathf.Min(pageSize, menuButtons.Count);
     }
 
     // Increment buttons by 1
     public void displayNext()
     {
-        int endInd = offset + displayedMenuButtons.Count - 1;
+        int endInd = offset + getNumberOfMenuButtonsDisplayed() -1; //-1 for index
         if (endInd + 1 <= menuButtons.Count - 1)
         {
             offset++;
@@ -139,7 +144,7 @@ public class CircleMenu : MonoBehaviour, Navigatable {
     // Display next page of buttons
     public void displayNextPage()
     {
-        int endInd = offset + displayedMenuButtons.Count - 1;
+        int endInd = offset + getNumberOfMenuButtonsDisplayed() - 1; //-1 for index
         if (endInd + pageSize > menuButtons.Count - 1)
         {
             offset = (menuButtons.Count - 1) - getNumberOfMenuButtonsDisplayed();

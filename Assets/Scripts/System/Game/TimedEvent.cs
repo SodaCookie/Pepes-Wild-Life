@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TimedEvent {
     // Private
-    private GameTime executionTime; //-1 means match any time for that time unit
-    private int executionTimes = 1; //-1 means infinite
+    protected GameTime executionTime; //-1 means match any time for that time unit
+    protected int executionTimes = 1; //-1 means infinite
 
     public TimedEvent(GameTime executionTime)
     {
@@ -48,6 +48,6 @@ public class TimedEvent {
     // Override this to change the behavior of the timed event
     protected virtual void performAction(Game game)
     {
-        Debug.Log("action performed");
+        // Override execution code here
     }
 }

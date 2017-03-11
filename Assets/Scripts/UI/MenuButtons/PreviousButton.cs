@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PreviousButton : MenuButton {
-    public Navigatable navigationTarget;
+    public CircleMenu navigationTarget;
 
     protected override void perform()
     {
