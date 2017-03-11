@@ -30,6 +30,7 @@ public class CircleMenu : MonoBehaviour, Navigatable {
 	// Use this for initialization
 	void Start () {
         // Record the center (cause it changes when we move buttons around)
+
         center = gameObject.transform.position;
         center.z = 0;
 
