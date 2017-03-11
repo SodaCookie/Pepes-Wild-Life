@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BedroomRoom : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
+public class BedroomRoom : Room {
 	
-	// Update is called once per frame
-	void Update () {
-		
+	public void Reset () {
+		type = "bedroom";
 	}
 }

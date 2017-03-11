@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OfficeRoom : MonoBehaviour {
+public class OfficeRoom : Room {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public void Reset () {
+		type = "office";
 	}
 }

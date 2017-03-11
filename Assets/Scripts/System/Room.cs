@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Room : MonoBehaviour {
 
+	public string type = "room";
+
 	// Use this for initialization
 	void Start () {
 		
