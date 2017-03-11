@@ -19,7 +19,7 @@ public class MoveToGoal : PepeGoal {
 		return true;
 	}
 
-	public override void interrupt(PepeGoal goal) {
+	public override void interrupt(PepeGoal goal, PepeBehaviour pepe) {
 		completed = true;
 	}
 }

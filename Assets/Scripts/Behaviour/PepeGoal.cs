@@ -11,7 +11,7 @@ public class PepeGoal {
 		// Search for game
 	}
 
-	public virtual void initialize() {
+	public virtual void initialize(PepeBehaviour pepe) {
 		// Override to change starting calculations
 	}
 
@@ -19,7 +19,7 @@ public class PepeGoal {
 		return true;
 	}
 
-	public virtual void interrupt(PepeGoal goal) {
+	public virtual void interrupt(PepeGoal goal, PepeBehaviour pepe) {
 		// Override to set interrupt
 	}
 

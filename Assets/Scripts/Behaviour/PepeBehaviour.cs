@@ -11,7 +11,7 @@ public class PepeBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		goals = new LinkedList<PepeGoal> ();
-		goals.AddLast (new MoveToGoal(GameObject.Find("Garage")));
+		AddGoal (new WanderGoal());
 	}
 
 	// Update is called once per frame
@@ -44,9 +44,11 @@ public class PepeBehaviour : MonoBehaviour {
 		}
 	}
 
-	void AddGoal(PepeGoal goal) {
-		goals.Last.Value.interrupt (goal);
-		goals.AddLast (goal);
-		goal.initialize ();
+	public void AddGoal(PepeGoal goal) {
+		if (goals.Count > 0) {
+			goals.Last.Value.interrupt (goal, this);
+		}
+		goals.AddFirst (goal);
+		goal.initialize (this);
 	}
 }

@@ -10,9 +10,10 @@ public class Pathing : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		nodes = new List<Node> ();
 		// Assign Indexes
 		for (int i = 0; i < gameNodes.Count; i++) {
-			nodes.Add(nodes [i].GetComponent<Node> ());
+			nodes.Add(gameNodes [i].GetComponent<Node> ());
 			nodes [i].index = i;
 		}
 
