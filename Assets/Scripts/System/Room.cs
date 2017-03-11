@@ -1,18 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room : MonoBehaviour {
+public class Room : MonoBehaviour, Interactable
+{
+    private List<Interaction> genericInteractions = new List<Interaction>();
 
-	public string type = "room";
+    void Awake()
+    {
+        populateGenericInteractions();
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public List<Interaction> getInteractions()
+    {
+        return new List<Interaction>(genericInteractions);
+    }
+
+    void populateGenericInteractions()
+    {
+        // Add interactions that should work with every room to the list in this function
+    }
 }

@@ -16,6 +16,8 @@ public class Game : MonoBehaviour {
     private float dayStartTime;
     private int elapsedDays;
     private GameTime lastTimedEventsExecution;
+    private float currentEntertainment = 0;
+    private float currentSuspicion = 0;
 
     // list of timed events
     private List<TimedEvent> timedEvents = new List<TimedEvent>();
@@ -99,5 +101,15 @@ public class Game : MonoBehaviour {
     public float gameSecondsToRealMusic(float gameSeconds)
     {
         return gameSeconds * timeScale;
+    }
+
+    public void addSuspicion(float amount)
+    {
+        currentSuspicion += amount;
+    }
+
+    public void addEntertainment(float amount)
+    {
+        currentEntertainment += amount;
     }
 }

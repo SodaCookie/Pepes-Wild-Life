@@ -1,16 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class House : MonoBehaviour {
+public class House : MonoBehaviour, Interactable {
+    private List<Interaction> genericInteractions = new List<Interaction>();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    void Awake()
+    {
+        populateGenericInteractions();
+    }
+
+    public List<Interaction> getInteractions()
+    {
+        return new List<Interaction>(genericInteractions);
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	void populateGenericInteractions()
+    {
+        // Add interactions that should work on the house
+    }
 }
