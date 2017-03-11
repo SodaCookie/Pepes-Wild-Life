@@ -14,11 +14,12 @@ public class LightBehaviour : MonoBehaviour {
 		sunrise = new GameTime (-1, -1, 5, 0, 0);
 		highnoon = new GameTime (-1, -1, 12, 0, 0);
 		sunset = new GameTime (-1, -1, 20, 0, 0);
-		twilight = new GameTime (-1, -1, 22, 0, 0);
+		twilight = new GameTime (-1, -1, 23, 59, 59);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Game.instance ();
+		GameTime curtime = Game.instance ().getCurrentGameTime ();
+
 	}
 }
