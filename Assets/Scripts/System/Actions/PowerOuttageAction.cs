@@ -9,4 +9,9 @@ public class PowerOuttageAction : Action {
         suspiciousness = 5;
         cost = 500;
     }
+
+    protected override void performAction(Game game)
+    {
+        game.pepe.AddGoal(new WanderGoal(10));
+    }
 }

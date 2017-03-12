@@ -14,9 +14,10 @@ public class Action {
     {
         if (game.getCurrentWealth() > cost)
         {
+            performAction(game);
             game.addEntertainment(entertainmentValue);
             game.addSuspicion(suspiciousness);
-            performAction(game);
+            game.spendMoney(cost);
             return true;
         }
         return false;

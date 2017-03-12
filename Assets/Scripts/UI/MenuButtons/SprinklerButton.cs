@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprinklerButton : MonoBehaviour {
+public class SprinklerButton : MenuButton {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    protected override void perform()
+    {
+        SprinklerAction act = new SprinklerAction();
+        FireActionInteraction inter = new FireActionInteraction(act);
+        inter.execute();
+    }
 }

@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprinklerAction : MonoBehaviour {
+public class SprinklerAction : Action {
+    public SprinklerAction()
+    {
+        entertainmentValue = 25;
+        suspiciousness = 5;
+        cost = 500;
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    protected override void performAction(Game game)
+    {
+        // TODO: Add some action for leaving/avoiding the room
+    }
 }

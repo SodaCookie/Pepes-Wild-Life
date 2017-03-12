@@ -179,4 +179,9 @@ public class Game : MonoBehaviour {
     {
         currentEntertainment += amount;
     }
+
+    public void spendMoney(float amount)
+    {
+        currentWealth -= amount;
+    }
 }
