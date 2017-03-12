@@ -120,6 +120,8 @@ public class CircleMenu : MonoBehaviour, Navigatable {
             direction = direction * radius;
             mb.gameObject.transform.position = center + direction;
 
+            Debug.DrawRay(center, center + direction, Color.green, 20);
+
             // Increment the index
             index++;
         }
@@ -192,5 +194,8 @@ public class CircleMenu : MonoBehaviour, Navigatable {
 			menuButtons.Add (menuButton);
 			prefab.transform.SetParent (menuButtonsObject.transform);
 		}
+
+        center = transform.position;
+        UpdateDisplayedMenuButtons();
 	}
 }
