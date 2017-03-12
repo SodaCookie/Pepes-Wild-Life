@@ -12,4 +12,11 @@ public class Room : MonoBehaviour, Clickable
     {
         return new List<GameObject>(genericMenuButtons);
     }
+
+	public void openMenu() {
+		CircleMenu menu = Game.instance ().actionMenu;
+		menu.transform.position = Input.mousePosition;
+		menu.setMenuButtons (getButtons (), this);
+		menu.openMenu ();
+	}
 }

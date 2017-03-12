@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FireCrackerButton : MenuButton {
-    private Room targetRoom;
-
-    public void setTargetRoom(Room room)
-    {
-        targetRoom = room;
-    }
 
     protected override void perform()
     {

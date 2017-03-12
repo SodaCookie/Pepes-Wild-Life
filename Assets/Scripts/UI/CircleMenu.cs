@@ -19,17 +19,18 @@ public class CircleMenu : MonoBehaviour, Navigatable {
     public MenuButton nextMenuButton;
     [Tooltip("Prefab for previous button")]
     public MenuButton prevMenuButton;
-    [Tooltip("The buttons to display.")]
-    public List<MenuButton> menuButtons = new List<MenuButton>();
 
     // Private
+	private List<MenuButton> menuButtons = new List<MenuButton>();
     private List<MenuButton> displayedMenuButtons = new List<MenuButton>();
     private int offset = 0;
     private Vector3 center;
+	private GameObject menuButtonsObject;
 
     void Awake()
     {
         Game.instance().actionMenu = this;
+		menuButtonsObject = GameObject.Find ("MenuButtons");
     }
 
 	// Use this for initialization
@@ -178,4 +179,18 @@ public class CircleMenu : MonoBehaviour, Navigatable {
         }
         UpdateDisplayedMenuButtons();
     }
+
+	public void setMenuButtons(List<GameObject> buttons, Room room) {
+		foreach (Transform child in menuButtonsObject.transform) {
+			Destroy (child.gameObject);
+		}
+		menuButtons.Clear ();
+		foreach (var button in buttons) {
+			var prefab = Instantiate (button);
+			var menuButton = prefab.GetComponent<MenuButton> ();
+			menuButton.setTargetRoom (room);
+			menuButtons.Add (menuButton);
+			prefab.transform.SetParent (menuButtonsObject.transform);
+		}
+	}
 }

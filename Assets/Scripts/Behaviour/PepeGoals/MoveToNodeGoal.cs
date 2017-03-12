@@ -65,6 +65,7 @@ public class MoveToNodeGoal : PepeGoal {
 
 	public override bool run(PepeBehaviour pepe) {
 		if (dirty) {
+			Debug.Log ("fdsafdsafdsa");
 			pepe.speed = speed;
 			search (pepe);
 			dirty = false;

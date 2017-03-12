@@ -17,6 +17,7 @@ public class FireCrackerAction : Action {
     {
         Node roomNode = targetRoom.gameObject.GetComponent<Node>();
         PepeGoal goal = new MoveToNodeGoal(roomNode, 10);
+		Debug.Log ("fdsfdsafds");
         game.pepe.AddGoal(goal);
     }
 }

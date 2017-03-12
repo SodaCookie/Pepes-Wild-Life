@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class MenuButton : MonoBehaviour {
     public bool clickable = true;
+	protected Room targetRoom;
 
     private Button myUIButton;
 
@@ -18,6 +19,11 @@ public class MenuButton : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// TODO: Visually mask unclickable buttons
+	}
+
+	public void setTargetRoom(Room room)
+	{
+		targetRoom = room;
 	}
 
     public void OnClickHandler()
