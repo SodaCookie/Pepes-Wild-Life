@@ -20,7 +20,8 @@ public class TimedEvent {
 
     public void executeEvent(Game game)
     {
-        executionTimes--;
+        if (executionTimes > 0)
+            executionTimes--;
         performAction(game);
     }
 

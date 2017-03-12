@@ -113,7 +113,7 @@ public class GameTime {
         g.hour += g.minute / MINUTES_PER_HOUR;
         g.minute = g.minute % MINUTES_PER_HOUR;
         g.day += g.hour / HOURS_PER_DAY;
-        g.hour = g.hour & HOURS_PER_DAY;
+        g.hour = g.hour % HOURS_PER_DAY;
         g.era += g.day / DAYS_PER_ERA;
         g.day = g.day % DAYS_PER_ERA;
         return g;

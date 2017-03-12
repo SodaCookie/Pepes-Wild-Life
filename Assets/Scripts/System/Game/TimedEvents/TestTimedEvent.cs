@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TestTimedEvent : TimedEvent {
-    public TestTimedEvent(GameTime executionTime) : base(executionTime) { }
+    private string debug;
 
-    public TestTimedEvent(GameTime executionTime, int executionTimes) : base(executionTime, executionTimes) { }
+    public TestTimedEvent(GameTime executionTime, string debug) : base(executionTime) {
+        this.debug = debug;
+    }
+
+    public TestTimedEvent(GameTime executionTime, string debug, int executionTimes) : base(executionTime, executionTimes) {
+        this.debug = debug;
+    }
 
     protected override void performAction(Game game)
     {
-        Debug.Log("TEST TIMED EVENT");
+        Debug.Log(debug);
     }
 }
