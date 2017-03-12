@@ -16,7 +16,9 @@ public class Room : MonoBehaviour, Clickable
 	public void openMenu() {
 		CircleMenu menu = Game.instance ().actionMenu;
 		menu.transform.position = Input.mousePosition;
-		menu.setMenuButtons (getButtons (), this);
+        menu.radius = 50;
+        menu.displayWheel = true;
+		menu.setMenuButtons (getButtons(), this);
 		menu.openMenu ();
 	}
 }

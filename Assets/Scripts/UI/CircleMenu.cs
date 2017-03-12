@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CircleMenu : MonoBehaviour, Navigatable {
     // Public
+    [Tooltip("Whether or not to display the center wheel")]
+    public bool displayWheel = true;
     [Tooltip("How many buttons are displayed at most in the menu")]
     public int pageSize = 5;
     [Tooltip("How large the menu is")]
@@ -19,6 +21,8 @@ public class CircleMenu : MonoBehaviour, Navigatable {
     public MenuButton nextMenuButton;
     [Tooltip("Prefab for previous button")]
     public MenuButton prevMenuButton;
+    [Tooltip("Center wheel to optionally display")]
+    public GameObject centerWheel;
 
     // Private
 	private List<MenuButton> menuButtons = new List<MenuButton>();
@@ -31,6 +35,7 @@ public class CircleMenu : MonoBehaviour, Navigatable {
     {
         Game.instance().actionMenu = this;
 		menuButtonsObject = GameObject.Find ("MenuButtons");
+        centerWheel.gameObject.SetActive(false);
     }
 
 	// Use this for initialization
@@ -51,6 +56,13 @@ public class CircleMenu : MonoBehaviour, Navigatable {
     public void openMenu()
     {
         gameObject.SetActive(true);
+        centerWheel.SetActive(false);
+        if (displayWheel)
+        {
+            centerWheel.SetActive(true);
+            centerWheel.GetComponent<RectTransform>().sizeDelta = new Vector2((radius-25) * 2, (radius-25) * 2);
+            centerWheel.transform.position = center;
+        }
     }
 
     public void closeMenu()
@@ -105,6 +117,7 @@ public class CircleMenu : MonoBehaviour, Navigatable {
     // Draw the buttons to the correct positions
     void UpdateMenuButtonPositions()
     {
+        center = transform.position;
         int index = 0;
         float range = maxAngle - minAngle;
         float degPerIndex = range / (displayedMenuButtons.Count - 1); // -1 because one button will be at position 0
@@ -195,7 +208,24 @@ public class CircleMenu : MonoBehaviour, Navigatable {
 			prefab.transform.SetParent (menuButtonsObject.transform);
 		}
 
-        center = transform.position;
         UpdateDisplayedMenuButtons();
 	}
+
+    public void setMenuButtons(List<GameObject> buttons)
+    {
+        foreach (Transform child in menuButtonsObject.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        menuButtons.Clear();
+        foreach (var button in buttons)
+        {
+            var prefab = Instantiate(button);
+            var menuButton = prefab.GetComponent<MenuButton>();
+            menuButtons.Add(menuButton);
+            prefab.transform.SetParent(menuButtonsObject.transform);
+        }
+
+        UpdateDisplayedMenuButtons();
+    }
 }
