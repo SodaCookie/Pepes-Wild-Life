@@ -56,7 +56,15 @@ public class PepeBehaviour : MonoBehaviour {
 		goal.initialize (this);
 	}
 
-	public void PostMessage(string message) {
+    public void PostMessage(string message, int realSeconds)
+    {
+        DisplayMessage(message);
+        var destroyTime = Game.instance().getCurrentGameTime() + (int)Game.instance().realSecondsToGameSeconds(realSeconds);
+        var action_timed_event = new RemovePepeMessageTimedEvent(destroyTime);
+        Game.instance().scheduleTimedEvent(action_timed_event);
+    }
+
+	private void DisplayMessage(string message) {
 		speech_bubble.SetActive (true);
 		speech_bubble.GetComponentInChildren<Text> ().text = message;
 	}

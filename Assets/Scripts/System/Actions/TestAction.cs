@@ -5,8 +5,8 @@ using UnityEngine;
 public class TestAction : Action {
     public TestAction() : base()
     {
-        entertainmentValue = 15;
-        suspiciousness = 8;
+        entertainmentValue = 30;
+        suspiciousness = 5;
     }
 
     protected override void performAction(Game game)

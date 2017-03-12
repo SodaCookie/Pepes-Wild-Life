@@ -28,14 +28,7 @@ public class WanderGoal : PepeGoal {
 		// Speech every 5 locations
 		counter++;
 		if (counter % 5 == 0) {
-			pepe.PostMessage (possible_dialogs [Random.Range (0, possible_dialogs.Length - 1)]);
-			var action = new RemoveMessageAction (pepe);
-			var cur_game_time = Game.instance ().getCurrentGameTime ();
-			for (int i = 0; i < 10; i++) {
-				cur_game_time++;
-			}
-			var action_timed_event = new ActionTimedEvent(cur_game_time, action);
-			Game.instance ().scheduleTimedEvent (action_timed_event);
+			pepe.PostMessage (possible_dialogs [Random.Range (0, possible_dialogs.Length - 1)], 3);
 		}
 		return true;
 	}

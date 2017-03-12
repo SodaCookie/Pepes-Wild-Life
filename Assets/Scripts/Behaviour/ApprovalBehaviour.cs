@@ -18,7 +18,6 @@ public class ApprovalBehaviour : MonoBehaviour {
 		float b = 150f;
 		float y = 0.008f;
 		float percentage = Mathf.Clamp(a * Mathf.Exp(-b * Mathf.Exp(-y * approval)) + 0.1f, 0f, 1f);
-		print (percentage);
 		// 490 is the furtherest seen value
 		transform.localPosition = new Vector3 ((1f - percentage) * -490f, transform.localPosition.y, transform.localPosition.z);
 	}

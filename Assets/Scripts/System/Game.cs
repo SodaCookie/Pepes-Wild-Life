@@ -41,7 +41,7 @@ public class Game : MonoBehaviour {
         SetupDayNightCycles();
 
         //TEST
-        scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, -1, 0, 0), "HOUR", -1));
+        scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, -1, 0, 0), Time.time.ToString() , -1));
         //scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, -1, -1, 0), "MINUTE", -1));
 
         startNextDay();
