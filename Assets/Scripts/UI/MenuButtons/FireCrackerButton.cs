@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireCrackerButton : MenuButton {
 
-	public GameObject animation;
+	public new GameObject animation;
 
 	private string[] quotes = new string[] {
 		"What's going on?!?",

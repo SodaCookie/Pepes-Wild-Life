@@ -14,7 +14,9 @@ public class PepeBehaviour : MonoBehaviour {
 	void Awake () {
         Game.instance().pepe = this;
 		goals = new LinkedList<PepeGoal> ();
+//		AddGoal (new WaitGoal(5f, GameObject.Find("Office").GetComponent<Node>()));
 		AddGoal (new WanderGoal(1f));
+		AddGoal (new MoveFromNodeGoal(GameObject.Find("Office").GetComponent<Node>()));
 //		AddGoal (new MoveToNodeGoal(GameObject.Find("Kitchen").GetComponent<Node>(), 5f));
 	}
 

@@ -6,6 +6,7 @@ public class WanderGoal : PepeGoal {
 
 	private float speed;
 	private int counter = 0;
+	private int previous = 11;
 	private string[] possible_dialogs = new string[]{
 		"What a beautiful day.",
 		"I wonder if it's raining?",
@@ -21,14 +22,36 @@ public class WanderGoal : PepeGoal {
 
 	public override bool run(PepeBehaviour pepe) {
 		// Simply moves pepe to the goal
+		Debug.Log (Game.instance().getCurrentSuspicion());
+		if (Game.instance().getCurrentSuspicion() > 50) {
+			Debug.Log ("Increasing level");
+			Game.instance ().music.pitch = 1.25f;
+			pepe.AddGoal (new AnxiousGoal ());
+			return true;
+		}
 		Pathing p = GameObject.Find("Pathing").GetComponent<Pathing>();
-		int n = Random.Range (0, p.nodes.Count - 1);
-		pepe.AddGoal(new MoveToNodeGoal(p.nodes[n], speed));
+		if (Random.value < 0.7) {
+			Debug.Log ("Moving");
+			int n = Random.Range (0, p.nodes.Count - 1);
+			previous = n;
+			pepe.AddGoal (new MoveToNodeGoal (p.nodes [n], speed));
+		}
+		else {
+			Debug.Log ("Waiting");
+			if (p.nodes [previous].gameObject.GetComponent<Room> ()) { // Only wait in rooms
+				pepe.AddGoal (new WaitGoal (Random.Range (5f, 10f), p.nodes [previous], 2f));
+			} else {
+				Debug.Log ("Moving");
+				int n = Random.Range (0, p.nodes.Count - 1);
+				previous = n;
+				pepe.AddGoal (new MoveToNodeGoal (p.nodes [n], speed));
+			}
+		}
 
 		// Speech every 5 locations
 		counter++;
 		if (counter % 5 == 0) {
-			pepe.PostMessage (possible_dialogs [Random.Range (0, possible_dialogs.Length - 1)], 3);
+			pepe.PostMessage (possible_dialogs [Random.Range (0, possible_dialogs.Length)], 3);
 		}
 		return true;
 	}
