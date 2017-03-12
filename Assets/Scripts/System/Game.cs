@@ -41,6 +41,9 @@ public class Game : MonoBehaviour {
     private float currentWealth = 2500;
     private bool nightTime = true;
 
+	private bool startedGame = false;
+	private bool gameOver_ = false;
+
 
     // list of timed events
     private List<TimedEvent> timedEvents = new List<TimedEvent>();
@@ -59,7 +62,8 @@ public class Game : MonoBehaviour {
         //scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, -1, 0, 0), "hour", -1));
         //scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, -1, -1, 0), "MINUTE", -1));
 
-        startNextDay();
+		transition.BeginSlide("Day 1");
+//        startNextDay();
 	}
 
 	void Awake () {
@@ -69,8 +73,14 @@ public class Game : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        HandleTimedEvents();
-        CheckResources();
+		if (transition.finished && !startedGame && !gameOver_) {
+			startNextDay ();
+			startedGame = true;
+		}
+		if (startedGame) {
+			HandleTimedEvents();
+			CheckResources();
+		}
 	}
 
     // Calls timed events that need to called
@@ -133,16 +143,20 @@ public class Game : MonoBehaviour {
 
     public void endDay()
     {
-        Debug.Log("Day Ended!");
         nightTime = true;
         tallyScore();
-		transition.BeginTransition ();
+		if (currentWealth <= 0) {
+			gameOver ("You went bankrupt\nNeverlucky");
+		} else {
+			transition.BeginTransition ();
+		}
 
     }
 
     private void tallyScore()
     {
         currentWealth += currentEntertainment;
+		currentWealth -= 100; // Upkeep
         currentSuspicion = currentSuspicion * (elapsedDays/((float)(elapsedDays + 4)));
     }
 
@@ -173,6 +187,12 @@ public class Game : MonoBehaviour {
         to_ret.correctTimes();
         return to_ret;
     }
+
+	public void gameOver(string message) {
+		startedGame = false;
+		gameOver_ = true;
+		transition.BeginStopSlide (message);
+	}
 
     public float getCurrentSuspicion()
     {

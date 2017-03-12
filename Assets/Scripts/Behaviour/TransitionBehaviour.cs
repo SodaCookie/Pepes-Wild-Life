@@ -6,6 +6,8 @@ public class TransitionBehaviour : MonoBehaviour {
 
 	private bool transitioning = false;
 	private bool cue_in = false;
+	private bool slide = false;
+	private bool stop = false;
 	private float t = 0.0f;
 	private float step = 0.01f;
 	public bool finished = true;
@@ -28,12 +30,18 @@ public class TransitionBehaviour : MonoBehaviour {
 				t = Mathf.Clamp (t - step, 0.0f, max);
 			}
 			if (cue_in && t == max) {
-				cue_in = false;
-				Game.instance ().startNextDay ();
+				if (!stop) {
+					cue_in = false;
+				} else {
+					finished = true;
+				}
+				if (!slide) {
+					Game.instance ().startNextDay ();
+				}
 			} else if (!cue_in && t == 0.0f) {
 				transitioning = false;
 				finished = true;
-				gameObject.GetComponent<RectTransform>().position = new Vector3 (-900f, 0f, 0f);
+				gameObject.GetComponent<RectTransform>().position = new Vector3 (-1200f, 0f, 0f);
 			}
 
 			float w = Mathf.Clamp (t, 0.0f, 1.0f);
@@ -47,7 +55,31 @@ public class TransitionBehaviour : MonoBehaviour {
 	public void BeginTransition() {
 		GameObject.Find ("TransitionText").GetComponent<UnityEngine.UI.Text> ().text = "Day " + (Game.instance ().getCurrentGameTime ().day + 1).ToString ();
 		transitioning = true;
+		slide = false;
+		stop = false;
 		cue_in = true;
+		finished = false;
+		t = 0.0f;
+		gameObject.GetComponent<RectTransform>().position = new Vector3 ();
+	}
+
+	public void BeginStopSlide(string message) {
+		GameObject.Find ("TransitionText").GetComponent<UnityEngine.UI.Text> ().text = message;
+		transitioning = true;
+		cue_in = true;
+		stop = true;
+		slide = true;
+		finished = false;
+		t = 0.0f;
+		gameObject.GetComponent<RectTransform>().position = new Vector3 ();
+	}
+
+	public void BeginSlide(string message) {
+		GameObject.Find ("TransitionText").GetComponent<UnityEngine.UI.Text> ().text = message;
+		transitioning = true;
+		cue_in = true;
+		stop = false;
+		slide = true;
 		finished = false;
 		t = 0.0f;
 		gameObject.GetComponent<RectTransform>().position = new Vector3 ();
