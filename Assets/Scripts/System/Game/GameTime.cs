@@ -37,14 +37,7 @@ public class GameTime {
     public void addSeconds(int seconds)
     {
         second += seconds;
-        minute += second / SECONDS_PER_MINUTE;
-        second = second % SECONDS_PER_MINUTE;
-        hour += minute / MINUTES_PER_HOUR;
-        minute = minute % MINUTES_PER_HOUR;
-        day += hour / HOURS_PER_DAY;
-        hour = hour & HOURS_PER_DAY;
-        era += day / DAYS_PER_ERA;
-        day = day % DAYS_PER_ERA;
+        correctTimes();
     }
 
     public void addMinutes(int minutes)
@@ -108,14 +101,7 @@ public class GameTime {
     public static GameTime operator ++(GameTime g)
     {
         g.second++;
-        g.minute += g.second / SECONDS_PER_MINUTE;
-        g.second = g.second % SECONDS_PER_MINUTE;
-        g.hour += g.minute / MINUTES_PER_HOUR;
-        g.minute = g.minute % MINUTES_PER_HOUR;
-        g.day += g.hour / HOURS_PER_DAY;
-        g.hour = g.hour % HOURS_PER_DAY;
-        g.era += g.day / DAYS_PER_ERA;
-        g.day = g.day % DAYS_PER_ERA;
+        g.correctTimes();
         return g;
     }
 
@@ -123,14 +109,7 @@ public class GameTime {
     {
         GameTime g_new = new GameTime(g);
         g_new.second+= seconds;
-        g_new.minute += g_new.second / SECONDS_PER_MINUTE;
-        g_new.second = g_new.second % SECONDS_PER_MINUTE;
-        g_new.hour += g_new.minute / MINUTES_PER_HOUR;
-        g_new.minute = g_new.minute % MINUTES_PER_HOUR;
-        g_new.day += g_new.hour / HOURS_PER_DAY;
-        g_new.hour = g_new.hour & HOURS_PER_DAY;
-        g_new.era += g_new.day / DAYS_PER_ERA;
-        g_new.day = g_new.day % DAYS_PER_ERA;
+        g_new.correctTimes();
         return g_new;
     }
 
@@ -142,5 +121,17 @@ public class GameTime {
     public override int GetHashCode()
     {
         return base.GetHashCode();
+    }
+
+    public void correctTimes()
+    {
+        minute += second / SECONDS_PER_MINUTE;
+        second = second % SECONDS_PER_MINUTE;
+        hour += minute / MINUTES_PER_HOUR;
+        minute = minute % MINUTES_PER_HOUR;
+        day += hour / HOURS_PER_DAY;
+        hour = hour % HOURS_PER_DAY;
+        era += day / DAYS_PER_ERA;
+        day = day % DAYS_PER_ERA;
     }
 }

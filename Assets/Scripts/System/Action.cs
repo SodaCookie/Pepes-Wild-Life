@@ -12,7 +12,7 @@ public class Action {
 
     public bool execute(Game game)
     {
-        if (game.getCurrentWealth() > cost)
+        if (canExecute(game))
         {
             performAction(game);
             game.addEntertainment(entertainmentValue);
@@ -26,5 +26,10 @@ public class Action {
     protected virtual void performAction(Game game)
     {
         // Perform the acction here
+    }
+
+    public bool canExecute(Game game)
+    {
+        return game.getCurrentWealth() >= cost;
     }
 }

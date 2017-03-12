@@ -13,7 +13,9 @@ public class Game : MonoBehaviour {
     // Public
     [HideInInspector]
     public House house; // Set on awake by the object itself
+    [HideInInspector]
     public PepeBehaviour pepe; // Set on awake by the object itself
+    [HideInInspector]
     public CircleMenu actionMenu; // Set on awake by the object itself
 
 	public const float MAX_SUSPICION = 100f;
@@ -28,6 +30,7 @@ public class Game : MonoBehaviour {
     private float currentWealth = 1000;
     private bool nightTime = true;
 
+
     // list of timed events
     private List<TimedEvent> timedEvents = new List<TimedEvent>();
 
@@ -41,7 +44,7 @@ public class Game : MonoBehaviour {
         SetupDayNightCycles();
 
         //TEST
-        //scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, -1, 0, 0), Time.time.ToString() , -1));
+        //scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, 0, 0, 0), "Hour", -1));
         //scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, -1, -1, 0), "MINUTE", -1));
 
         startNextDay();
@@ -57,16 +60,20 @@ public class Game : MonoBehaviour {
     {
         GameTime curTime = getCurrentGameTime();
         List<TimedEvent> toRemove = new List<TimedEvent>();
+
         //Simulate each second between last update and now
         while (lastTimedEventsExecution != curTime)
         {
+            //TEST
+            int tmp;
+            if (lastTimedEventsExecution.day == GameTime.DAYS_PER_ERA - 1 && lastTimedEventsExecution.hour == 23 && lastTimedEventsExecution.minute == 59 && lastTimedEventsExecution.second == 59)
+                tmp = 4;
             if (nightTime)
                 break;
             lastTimedEventsExecution++;
             // Call and execute each event, check if it should be removed
             foreach (TimedEvent te in timedEvents)
             {
-
                 if (te.shouldExecute(lastTimedEventsExecution))
                     te.executeEvent(this);
                 if (te.isFinished())
@@ -81,7 +88,7 @@ public class Game : MonoBehaviour {
 
     private void SetupDayNightCycles()
     {
-        scheduleTimedEvent(new EndDayTimedEvent(END_OF_DAY));
+        scheduleTimedEvent(new EndDayTimedEvent(END_OF_DAY, -1));
     }
 
     public void scheduleTimedEvent(TimedEvent te)
@@ -135,13 +142,7 @@ public class Game : MonoBehaviour {
         to_ret.hour = to_ret.minute / GameTime.MINUTES_PER_HOUR;
         to_ret.minute = to_ret.minute % GameTime.MINUTES_PER_HOUR;
         // Special check so hours dont go above 60 causing infinite loops
-        if (to_ret.hour >= GameTime.HOURS_PER_DAY)
-        {
-            to_ret.hour = 0;
-            to_ret.minute = 0;
-            to_ret.second = 0;
-            to_ret.day += 1;
-        }
+        to_ret.correctTimes();
         return to_ret;
     }
 

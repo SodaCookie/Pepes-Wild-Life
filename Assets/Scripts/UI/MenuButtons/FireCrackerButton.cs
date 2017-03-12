@@ -12,22 +12,27 @@ public class FireCrackerButton : MenuButton {
 		"What was that!?!",
 		"Holy Jebus, what was that?",
 		"Was that a gunshot?",
-		"Was that a firecracker?"
+		"Was that a firecracker?",
+        "Dammit Joel! Is that you again?"
 	};
 
     protected override void perform()
     {
         if (!targetRoom)
             Debug.LogError("Target room not set!");
+
         FireCrackerAction act = new FireCrackerAction(targetRoom);
-        FireActionInteraction inter = new FireActionInteraction(act);
-        inter.execute();
 
-		// Spawn animation and sound
-		var firecracker = Instantiate(animation);
-		firecracker.transform.position = targetRoom.transform.position;
+        // Spawn animation and sound
+        if (act.canExecute(Game.instance()))
+        {
+            var firecracker = Instantiate(animation);
+            firecracker.transform.position = targetRoom.transform.position;
 
-		// Create message
-		Game.instance().pepe.PostMessage (quotes [Random.Range (0, quotes.Length - 1)], 3);
+            // Create message
+            Game.instance().pepe.PostMessage(quotes[Random.Range(0, quotes.Length - 1)], 3);
+        }
+
+        act.execute(Game.instance());
     }
 }
