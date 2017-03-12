@@ -12,6 +12,7 @@ public class PowerOutageButton : MenuButton {
         FireActionInteraction inter = new FireActionInteraction(act);
 		if (act.canExecute(Game.instance())) {
 			var electric = Instantiate(animation);
+			Game.instance ().music.volume = 0.2f;
 			electric.transform.position = new Vector3();
 			inter.execute();
 		}

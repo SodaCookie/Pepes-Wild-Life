@@ -14,6 +14,7 @@ public class SetLightsTimedAction : TimedEvent {
 
 	protected override void performAction(Game game)
 	{
+		Game.instance ().music.volume = 1;
 		if (light_set) {
 			if (day_set) {
 				game.lighting.enableDayLight();

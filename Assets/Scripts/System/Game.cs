@@ -23,6 +23,8 @@ public class Game : MonoBehaviour {
 	public LightBehaviour lighting; // Set on awake by the object itself
 	[HideInInspector]
 	public Pathing pathing; // Set on awake by the object itself
+	[HideInInspector]
+	public TransitionBehaviour transition; // Set on awake by the object itself
 
 	public const float MAX_SUSPICION = 100f;
 
@@ -110,7 +112,7 @@ public class Game : MonoBehaviour {
     // Code to handle starting the next day
     public void startNextDay()
     {
-        elapsedDays++;
+		elapsedDays++;
         dayStartTime = Time.time;
         nightTime = false;
     }
@@ -120,7 +122,8 @@ public class Game : MonoBehaviour {
         Debug.Log("Day Ended!");
         nightTime = true;
         tallyScore();
-        startNextDay();
+		transition.BeginTransition ();
+
     }
 
     private void tallyScore()
