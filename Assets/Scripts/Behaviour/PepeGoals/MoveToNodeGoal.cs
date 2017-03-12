@@ -39,7 +39,6 @@ public class MoveToNodeGoal : PepeGoal {
 		int dest = target.index;
 		path = new List<int> ();
 		path.Add (start);
-		Debug.Log (start);
 		if (!DFS (start, dest, new List<int> (), path)) {
 			Debug.Log ("Path not found.");
 		}

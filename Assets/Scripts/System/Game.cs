@@ -13,6 +13,8 @@ public class Game : MonoBehaviour {
     public PepeBehaviour pepe; // Set on awake by the object itself
     public CircleMenu actionMenu; // Set on awake by the object itself
 
+	public const float MAX_SUSPICION = 100f;
+
     // Private
     // State variables
     private float dayStartTime;
