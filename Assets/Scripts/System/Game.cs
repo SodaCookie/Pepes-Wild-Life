@@ -17,7 +17,10 @@ public class Game : MonoBehaviour {
     public PepeBehaviour pepe; // Set on awake by the object itself
     [HideInInspector]
     public CircleMenu actionMenu; // Set on awake by the object itself
-	public AudioSource music;
+	[HideInInspector]
+	public AudioSource music; // Set on awake by the object itself
+	[HideInInspector]
+	public LightBehaviour lighting; // Set on awake by the object itself
 
 	public const float MAX_SUSPICION = 100f;
 

@@ -6,7 +6,7 @@ public class WanderGoal : PepeGoal {
 
 	private float speed;
 	private int counter = 0;
-	private int previous = 11;
+	private int previous = -1;
 	private string[] possible_dialogs = new string[]{
 		"What a beautiful day.",
 		"I wonder if it's raining?",
@@ -30,7 +30,7 @@ public class WanderGoal : PepeGoal {
 			return true;
 		}
 		Pathing p = GameObject.Find("Pathing").GetComponent<Pathing>();
-		if (Random.value < 0.7) {
+		if (Random.value < 0.7 || previous == -1) {
 			Debug.Log ("Moving");
 			int n = Random.Range (0, p.nodes.Count - 1);
 			previous = n;
@@ -39,7 +39,7 @@ public class WanderGoal : PepeGoal {
 		else {
 			Debug.Log ("Waiting");
 			if (p.nodes [previous].gameObject.GetComponent<Room> ()) { // Only wait in rooms
-				pepe.AddGoal (new WaitGoal (Random.Range (5f, 10f), p.nodes [previous], 2f));
+				pepe.AddGoal (new WaitGoal (Random.Range (5f, 10f), p.nodes [previous], 1f));
 			} else {
 				Debug.Log ("Moving");
 				int n = Random.Range (0, p.nodes.Count - 1);
