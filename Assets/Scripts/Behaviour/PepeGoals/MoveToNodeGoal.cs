@@ -39,6 +39,7 @@ public class MoveToNodeGoal : PepeGoal {
 		int dest = target.index;
 		path = new List<int> ();
 		path.Add (start);
+		Debug.Log (start);
 		if (!DFS (start, dest, new List<int> (), path)) {
 			Debug.Log ("Path not found.");
 		}
@@ -65,9 +66,9 @@ public class MoveToNodeGoal : PepeGoal {
 
 	public override bool run(PepeBehaviour pepe) {
 		if (dirty) {
-			Debug.Log ("fdsafdsafdsa");
 			pepe.speed = speed;
 			search (pepe);
+			currentGoal = null;
 			dirty = false;
 		}
 		// Follow path

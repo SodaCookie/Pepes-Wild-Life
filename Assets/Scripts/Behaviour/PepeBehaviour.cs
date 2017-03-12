@@ -15,7 +15,7 @@ public class PepeBehaviour : MonoBehaviour {
         Game.instance().pepe = this;
 		goals = new LinkedList<PepeGoal> ();
 		AddGoal (new WanderGoal(5f));
-//		AddGoal (new MoveToNodeGoal(GameObject.Find("Away").GetComponent<Node>()));
+//		AddGoal (new MoveToNodeGoal(GameObject.Find("Kitchen").GetComponent<Node>(), 5f));
 	}
 
 	// Update is called once per frame
@@ -50,7 +50,7 @@ public class PepeBehaviour : MonoBehaviour {
 
 	public void AddGoal(PepeGoal goal) {
 		if (goals.Count > 0) {
-			goals.Last.Value.interrupt (goal, this);
+			goals.First.Value.interrupt (goal, this);
 		}
 		goals.AddFirst (goal);
 		goal.initialize (this);
