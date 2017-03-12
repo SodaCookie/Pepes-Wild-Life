@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PowerOutageButton : MenuButton {
 
+	public new GameObject animation;
+
     protected override void perform()
     {
         PowerOuttageAction act = new PowerOuttageAction();
         FireActionInteraction inter = new FireActionInteraction(act);
-        inter.execute();
+		if (act.canExecute(Game.instance())) {
+			var electric = Instantiate(animation);
+			electric.transform.position = new Vector3();
+			inter.execute();
+		}
     }
 }

@@ -104,6 +104,12 @@ public class LightBehaviour : MonoBehaviour {
 		}
 	}
 
+	public void setDayIntensity(float intensity) {
+		foreach (Light light in day_lights) {
+			light.intensity = intensity;
+		}
+	}
+
 	public void enableDayLight() {
 		dayLightDisabled = false;
 	}
