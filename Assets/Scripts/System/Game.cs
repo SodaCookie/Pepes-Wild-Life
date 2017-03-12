@@ -21,6 +21,8 @@ public class Game : MonoBehaviour {
 	public AudioSource music; // Set on awake by the object itself
 	[HideInInspector]
 	public LightBehaviour lighting; // Set on awake by the object itself
+	[HideInInspector]
+	public Pathing pathing; // Set on awake by the object itself
 
 	public const float MAX_SUSPICION = 100f;
 

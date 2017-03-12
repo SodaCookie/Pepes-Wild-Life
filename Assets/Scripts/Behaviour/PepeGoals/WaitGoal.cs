@@ -7,13 +7,30 @@ public class WaitGoal : PepeGoal {
 	private float speed;
 	private Node node;
 	private float duration;
+	private bool interruptable;
 	private MoveToGoal currentGoal;
 	private GameObject target;
 
-	public WaitGoal(float duration, Node node, float speed = 0.2f) {
+	public WaitGoal(float duration, Node node=null, float speed = 0.2f, bool interruptable=true) {
 		this.duration = duration;
 		this.node = node;
+		if (node == null) {
+			// Assign room node
+			float closest_distance = float.MaxValue;
+			Node closest_node = null;
+			foreach (Node n in Game.instance().pathing.nodes) {
+				if (Game.instance().pepe.room == n.node && n.gameObject.GetComponent<Room>() != null) {
+					float magnitude = (Game.instance().pepe.transform.position - n.transform.position).magnitude;
+					if (magnitude < closest_distance) {
+						closest_distance = magnitude;
+						closest_node = node;
+					}
+				}
+			}
+			this.node = closest_node;
+		}
 		this.speed = speed;
+		this.interruptable = interruptable;
 	}
 
 	public override bool run(PepeBehaviour pepe) {
@@ -43,10 +60,12 @@ public class WaitGoal : PepeGoal {
 	}
 
 	public override void interrupt (PepeGoal goal, PepeBehaviour pepe) {
-		completed = true;
-		currentGoal = null;
-		if (target != null) {
-			Object.Destroy (target);
+		if (interruptable) {
+			completed = true;
+			currentGoal = null;
+			if (target != null) {
+				Object.Destroy (target);
+			}
 		}
 	}
 }

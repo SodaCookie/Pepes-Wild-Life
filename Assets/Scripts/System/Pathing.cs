@@ -9,7 +9,9 @@ public class Pathing : MonoBehaviour {
 	public Dictionary<int, int[]> connections;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+		Game.instance ().pathing = this;
+
 		nodes = new List<Node> ();
 		// Assign Indexes
 		for (int i = 0; i < gameNodes.Count; i++) {
