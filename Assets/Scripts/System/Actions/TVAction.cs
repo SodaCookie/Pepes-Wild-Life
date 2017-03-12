@@ -8,9 +8,9 @@ public class TVAction : Action {
 
     public TVAction(Room targetRoom, TVBehavior tv)
     {
-        entertainmentValue = 5;
-        suspiciousness = 1;
-        cost = 0;
+        entertainmentValue = 15;
+        suspiciousness = 5;
+        cost = 50;
         this.targetRoom = targetRoom;
         this.tv = tv;
     }

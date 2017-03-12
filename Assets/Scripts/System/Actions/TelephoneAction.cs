@@ -18,7 +18,13 @@ public class TelephoneAction : Action {
     protected override void performAction(Game game)
     {
         Node roomNode = targetRoom.gameObject.GetComponent<Node>();
+        game.pepe.AddGoal(new CallbackGoal(waitCallBack));
         game.pepe.AddGoal(new DeleteGameObjectGoal(telephoneSoundSource));
         game.pepe.AddGoal(new MoveToNodeGoal(roomNode, 10));
+    }
+
+    public void waitCallBack()
+    {
+        Game.instance().pepe.AddGoal(new WaitGoal(15, targetRoom.gameObject.GetComponent<Node>()));
     }
 }
