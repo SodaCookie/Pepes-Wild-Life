@@ -15,6 +15,7 @@ public class Game : MonoBehaviour {
     public House house; // Set on awake by the object itself
     public PepeBehaviour pepe; // Set on awake by the object itself
     public CircleMenu actionMenu; // Set on awake by the object itself
+	public AudioSource music;
 
 	public const float MAX_SUSPICION = 100f;
 
@@ -45,6 +46,11 @@ public class Game : MonoBehaviour {
         //scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, -1, -1, 0), "MINUTE", -1));
 
         startNextDay();
+	}
+
+	void Awake () {
+		// TEMP
+		music = GameObject.Find("Music").GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame

@@ -22,6 +22,13 @@ public class WanderGoal : PepeGoal {
 
 	public override bool run(PepeBehaviour pepe) {
 		// Simply moves pepe to the goal
+		Debug.Log (Game.instance().getCurrentSuspicion());
+		if (Game.instance().getCurrentSuspicion() > 50) {
+			Debug.Log ("Increasing level");
+			Game.instance ().music.pitch = 1.25f;
+			pepe.AddGoal (new AnxiousGoal ());
+			return true;
+		}
 		Pathing p = GameObject.Find("Pathing").GetComponent<Pathing>();
 		if (Random.value < 0.7) {
 			Debug.Log ("Moving");
@@ -31,7 +38,14 @@ public class WanderGoal : PepeGoal {
 		}
 		else {
 			Debug.Log ("Waiting");
-			pepe.AddGoal (new WaitGoal (Random.Range(5f, 10f), p.nodes [previous]));
+			if (p.nodes [previous].gameObject.GetComponent<Room> ()) { // Only wait in rooms
+				pepe.AddGoal (new WaitGoal (Random.Range (5f, 10f), p.nodes [previous], 2f));
+			} else {
+				Debug.Log ("Moving");
+				int n = Random.Range (0, p.nodes.Count - 1);
+				previous = n;
+				pepe.AddGoal (new MoveToNodeGoal (p.nodes [n], speed));
+			}
 		}
 
 		// Speech every 5 locations

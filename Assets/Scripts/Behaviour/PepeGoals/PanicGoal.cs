@@ -2,29 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnxiousGoal : PepeGoal {
+public class PanicGoal : PepeGoal {
 
 	private float speed;
 	private int counter = 0;
 	private int previous;
 	private string[] possible_dialogs = new string[]{
-		"A lot of weird things going on lately.",
-		"Man I gotta lay off the hard stuff for a while",
-		"I didn't know I had so many unlit firecrackers.",
-		"I got to go finish my work soon.",
-		"This house is stupid.",
-		"Where did I put that remote...?",
-		"God my jimmies are russelled."
+		"What's going on man?",
+		"This has to be some sick joke.",
+		"I'm going to call the police.",
+		"I'm I seeing things?!?",
+		"I'm losing it.",
+		"Why is this happening to me.",
+		"Whoever you are please just come out.",
+		"WHY ME!? WHY ME!?"
 	};
 	private string[] paranoid_dialogs = new string[]{
-		"Is anyone there?",
-		"I know someone is here!",
-		"Imma kick you so hard your ancestors will feel dizzy!",
-		"We can talk about this.",
-		"Hey asshole, come out and fight me!"
+		"WTF!!!!!",
+		"HOLY LAMB CHOPS!!!",
+		"zut.",
+		"BOT LANE FED AGAIN!!!",
+		"MY POST DIDN'T MAKE FRONT PAGE!",
+		"THEY DOWNVOTED MY PEPE!",
+		"WHAT IS HAPPENING!!!"
 	};
 
-	public AnxiousGoal(int previous=-1, float speed = 3f) {
+	public PanicGoal(int previous=-1, float speed = 5f) {
 		this.speed = speed;
 		this.previous = previous;
 	}
@@ -33,16 +36,10 @@ public class AnxiousGoal : PepeGoal {
 		// Simply moves pepe to the goal
 		bool paranoid = false;
 		Pathing p = GameObject.Find("Pathing").GetComponent<Pathing>();
-		if (Game.instance ().getCurrentSuspicion() < 50f) {
+		if (Game.instance ().getCurrentSuspicion() < 75f) {
 			Debug.Log ("Decrease Level");
 			completed = true;
-			Game.instance ().music.pitch = 1.0f;
-			return true;
-		}
-		if (Game.instance ().getCurrentSuspicion() > 75f) {
-			Debug.Log ("Increase Level");
-			Game.instance ().music.pitch = 1.6f;
-			pepe.AddGoal (new PanicGoal ());
+			Game.instance ().music.pitch = 1.25f;
 			return true;
 		}
 		float roll = Random.value;
@@ -55,7 +52,7 @@ public class AnxiousGoal : PepeGoal {
 		else if (roll < 0.8) {
 			Debug.Log ("Pacing");
 			if (p.nodes [previous].gameObject.GetComponent<Room> ()) { // Only pace in rooms
-				pepe.AddGoal (new WaitGoal (Random.Range (5f, 10f), p.nodes [previous], 2f));
+				pepe.AddGoal (new WaitGoal (Random.Range (5f, 10f), p.nodes [previous], 4f));
 			} 
 			else {
 				Debug.Log ("Moving");
