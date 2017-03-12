@@ -26,6 +26,8 @@ public class FireCrackerButton : MenuButton {
         // Spawn animation and sound
         if (act.canExecute(Game.instance()))
         {
+            if (Game.instance().pepe.room == targetRoom.type)
+                act.enhance();
             var firecracker = Instantiate(animation);
             firecracker.transform.position = targetRoom.transform.position;
 

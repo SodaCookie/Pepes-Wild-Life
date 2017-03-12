@@ -10,7 +10,6 @@ public class SprinklerButton : MenuButton {
     {
         SprinklerAction act = new SprinklerAction();
         FireActionInteraction inter = new FireActionInteraction(act);
-        inter.execute();
 		// Spawn animation and sound
 		if (act.canExecute(Game.instance()))
 		{
@@ -19,13 +18,15 @@ public class SprinklerButton : MenuButton {
 				// Apply move away if in the same room
 				pepe.AddGoal (new MoveFromNodeGoal (targetRoom.gameObject.GetComponent<Node> ()));
 				Game.instance().pepe.PostMessage("Oh God! What the heck?", 3);
+                act.enhance();
 			} else {
 				// Move towards slowly
 				pepe.AddGoal (new MoveToNodeGoal (targetRoom.gameObject.GetComponent<Node> (), 2f));
 				Game.instance().pepe.PostMessage("What is that sprinking noise?", 3);
 			}
-			// Get room bounds
-			Vector3 bounds = targetRoom.gameObject.GetComponent<BoxCollider2D>().bounds.size;
+            inter.execute();
+            // Get room bounds
+            Vector3 bounds = targetRoom.gameObject.GetComponent<BoxCollider2D>().bounds.size;
 			var sprinklers = Instantiate(animation);
 			Destroy (sprinklers, 10f);
 			ParticleSystem.ShapeModule new_shape = sprinklers.GetComponent<ParticleSystem> ().shape;

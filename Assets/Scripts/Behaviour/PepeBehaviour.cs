@@ -9,6 +9,7 @@ public class PepeBehaviour : MonoBehaviour {
 	public string room = "outside";
 	public LinkedList<PepeGoal> goals;
 	public GameObject speech_bubble;
+    public DamageTextBehavior damageText;
 
 	// Use this for initialization
 	void Awake () {

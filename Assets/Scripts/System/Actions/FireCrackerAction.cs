@@ -13,6 +13,12 @@ public class FireCrackerAction : Action {
         this.targetRoom = targetRoom;
     }
 
+    public void enhance()
+    {
+        entertainmentValue = 150;
+        suspiciousness = 20;
+    }
+
     protected override void performAction(Game game)
     {
         Node roomNode = targetRoom.gameObject.GetComponent<Node>();
