@@ -7,7 +7,7 @@ public class SprinklerAction : Action {
     {
         entertainmentValue = 25;
         suspiciousness = 5;
-        cost = 500;
+        cost = 100;
     }
 
     protected override void performAction(Game game)

@@ -30,7 +30,7 @@ public class FireCrackerButton : MenuButton {
             firecracker.transform.position = targetRoom.transform.position;
 
             // Create message
-            Game.instance().pepe.PostMessage(quotes[Random.Range(0, quotes.Length - 1)], 3);
+            Game.instance().pepe.PostMessage(quotes[Random.Range(0, quotes.Length)], 3);
         }
 
         act.execute(Game.instance());

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElectricEffectBehaviour : MonoBehaviour {
 
-	private Light light;
+	private new Light light;
 	private float count =  1;
 
 	// Use this for initialization
