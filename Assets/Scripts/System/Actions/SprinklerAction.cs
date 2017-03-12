@@ -5,9 +5,9 @@ using UnityEngine;
 public class SprinklerAction : Action {
     public SprinklerAction()
     {
-        entertainmentValue = 25;
-        suspiciousness = 5;
-        cost = 100;
+        entertainmentValue = 250;
+        suspiciousness = 10;
+        cost = 200;
     }
 
     protected override void performAction(Game game)

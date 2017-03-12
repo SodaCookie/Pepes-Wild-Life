@@ -8,9 +8,9 @@ public class TelephoneAction : Action {
 
     public TelephoneAction(Room targetRoom, GameObject telephoneSoundSource)
     {
-        entertainmentValue = 5;
+        entertainmentValue = 50;
         suspiciousness = 1;
-        cost = 0;
+        cost = 100;
         this.targetRoom = targetRoom;
         this.telephoneSoundSource = telephoneSoundSource;
     }

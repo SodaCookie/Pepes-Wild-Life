@@ -15,6 +15,7 @@ public class Action {
         if (canExecute(game))
         {
             performAction(game);
+            game.lastActionExecutionTime = Time.time;
             game.addEntertainment(entertainmentValue);
             game.addSuspicion(suspiciousness);
             game.spendMoney(cost);

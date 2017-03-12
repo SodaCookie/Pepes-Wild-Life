@@ -5,8 +5,8 @@ using UnityEngine;
 public class PowerOuttageAction : Action {
     public PowerOuttageAction()
     {
-        entertainmentValue = 25;
-        suspiciousness = 5;
+        entertainmentValue = 400;
+        suspiciousness = 10;
         cost = 500;
     }
 

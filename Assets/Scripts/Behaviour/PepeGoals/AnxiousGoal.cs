@@ -34,38 +34,32 @@ public class AnxiousGoal : PepeGoal {
 		bool paranoid = false;
 		Pathing p = GameObject.Find("Pathing").GetComponent<Pathing>();
 		if (Game.instance ().getCurrentSuspicion() < 50f) {
-			Debug.Log ("Decrease Level");
 			completed = true;
 			Game.instance ().music.pitch = 1.0f;
 			return true;
 		}
 		if (Game.instance ().getCurrentSuspicion() > 75f) {
-			Debug.Log ("Increase Level");
 			Game.instance ().music.pitch = 1.6f;
 			pepe.AddGoal (new PanicGoal ());
 			return true;
 		}
 		float roll = Random.value;
 		if (roll < 0.6 || previous == -1) {
-			Debug.Log ("Moving");
 			int n = Random.Range (0, p.nodes.Count - 1);
 			previous = n;
 			pepe.AddGoal (new MoveToNodeGoal (p.nodes [n], speed));
 		}
 		else if (roll < 0.8) {
-			Debug.Log ("Pacing");
 			if (p.nodes [previous].gameObject.GetComponent<Room> ()) { // Only pace in rooms
 				pepe.AddGoal (new WaitGoal (Random.Range (5f, 10f), p.nodes [previous], 2f));
 			} 
 			else {
-				Debug.Log ("Moving");
 				int n = Random.Range (0, p.nodes.Count - 1);
 				previous = n;
 				pepe.AddGoal (new MoveToNodeGoal (p.nodes [n], speed));
 			}
 		}
 		else {
-			Debug.Log ("Pananoid");
 			paranoid = true;
 			pepe.AddGoal (new MoveToNodeGoal (p.nodes [previous], speed + 2f));
 		}

@@ -25,17 +25,20 @@ public class Game : MonoBehaviour {
 	public Pathing pathing; // Set on awake by the object itself
 	[HideInInspector]
 	public TransitionBehaviour transition; // Set on awake by the object itself
+    [HideInInspector]
+    public float lastActionExecutionTime;
 
-	public const float MAX_SUSPICION = 100f;
+	public const float MAX_SUSPICION = 100f; // Soft max that is clamped.
+    public const float BASE_ACTION_THRESHOLD = 10; // Seconds before reducing action
 
     // Private
     // State variables
     private float dayStartTime;
     private int elapsedDays = -1; // When we start the day it will increment to 0
     private GameTime lastTimedEventsExecution = new GameTime();
-    private float currentEntertainment = 0;
+    private float currentEntertainment = 400;
     private float currentSuspicion = 0;
-    private float currentWealth = 10000;
+    private float currentWealth = 2500;
     private bool nightTime = true;
 
 
@@ -51,8 +54,9 @@ public class Game : MonoBehaviour {
 	void Start () {
         SetupDayNightCycles();
 
+
         //TEST
-        //scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, 0, 0, 0), "Hour", -1));
+        //scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, -1, 0, 0), "hour", -1));
         //scheduleTimedEvent(new TestTimedEvent(new GameTime(-1, -1, -1, -1, 0), "MINUTE", -1));
 
         startNextDay();
@@ -66,6 +70,7 @@ public class Game : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         HandleTimedEvents();
+        CheckResources();
 	}
 
     // Calls timed events that need to called
@@ -77,10 +82,6 @@ public class Game : MonoBehaviour {
         //Simulate each second between last update and now
         while (lastTimedEventsExecution != curTime)
         {
-            //TEST
-            int tmp;
-            if (lastTimedEventsExecution.day == GameTime.DAYS_PER_ERA - 1 && lastTimedEventsExecution.hour == 23 && lastTimedEventsExecution.minute == 59 && lastTimedEventsExecution.second == 59)
-                tmp = 4;
             if (nightTime)
                 break;
             lastTimedEventsExecution++;
@@ -109,6 +110,19 @@ public class Game : MonoBehaviour {
         timedEvents.Add(te);
     }
 
+    public void CheckResources()
+    {
+        float deltaT = Time.time - lastActionExecutionTime;
+        float threshold = BASE_ACTION_THRESHOLD * ((1/((elapsedDays * 0.25f) + 1)));
+        if (deltaT > threshold)
+        {
+            float difference = deltaT - threshold;
+            currentEntertainment -= difference * Time.deltaTime;
+        }
+        if (currentEntertainment < 0)
+            currentEntertainment = 0;
+    }
+
     // Code to handle starting the next day
     public void startNextDay()
     {
@@ -129,7 +143,7 @@ public class Game : MonoBehaviour {
     private void tallyScore()
     {
         currentWealth += currentEntertainment;
-        currentEntertainment = 0;
+        currentSuspicion = currentSuspicion * (elapsedDays/((float)(elapsedDays + 4)));
     }
 
     // Get elapsed time in the day in real time

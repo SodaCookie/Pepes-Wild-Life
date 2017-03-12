@@ -7,8 +7,8 @@ public class FireCrackerAction : Action {
 
     public FireCrackerAction(Room targetRoom) : base()
     {
-        entertainmentValue = 15;
-        suspiciousness = 8;
+        entertainmentValue = 100;
+        suspiciousness = 15;
         cost = 100;
         this.targetRoom = targetRoom;
     }
