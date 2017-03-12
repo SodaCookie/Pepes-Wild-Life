@@ -31,7 +31,7 @@ public class WaitGoal : PepeGoal {
 			// Spawn a nearby mini goal
 			target = new GameObject();
 			pepe.speed = speed;
-			target.transform.position = node.transform.position + new Vector3(Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f)).normalized;
+			target.transform.position = node.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)).normalized * 0.5f;
 			currentGoal = new MoveToGoal (target);
 		}
 		currentGoal.run (pepe);
