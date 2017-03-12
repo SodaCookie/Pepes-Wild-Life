@@ -14,6 +14,7 @@ public class MoveToNodeGoal : PepeGoal {
 	public MoveToNodeGoal(Node target, float speed = 0.02f) {
 		this.target = target;
 		this.speed = speed;
+		path = new List<int> ();
 	}
 
 	public override void initialize (PepeBehaviour pepe) {
@@ -66,7 +67,6 @@ public class MoveToNodeGoal : PepeGoal {
 	public override bool run(PepeBehaviour pepe) {
 		if (dirty) {
 			pepe.speed = speed;
-            Debug.Log(speed);
 			search (pepe);
 			currentGoal = null;
 			dirty = false;

@@ -11,7 +11,7 @@ public class PanicGoal : PepeGoal {
 		"What's going on man?",
 		"This has to be some sick joke.",
 		"I'm going to call the police.",
-		"I'm I seeing things?!?",
+		"Am I seeing things?!?",
 		"I'm losing it.",
 		"Why is this happening to me.",
 		"Whoever you are please just come out.",
@@ -40,6 +40,10 @@ public class PanicGoal : PepeGoal {
 			Debug.Log ("Decrease Level");
 			completed = true;
 			Game.instance ().music.pitch = 1.25f;
+			return true;
+		}
+		if (Game.instance ().getCurrentSuspicion () >= 100f) {
+			pepe.AddGoal (new EscapeGoal());
 			return true;
 		}
 		float roll = Random.value;
@@ -71,10 +75,10 @@ public class PanicGoal : PepeGoal {
 		counter++;
 		if (counter % 5 == 0) {
 			if (paranoid) {
-				pepe.PostMessage (paranoid_dialogs [Random.Range (0, possible_dialogs.Length)], 3);
+				pepe.PostMessage (paranoid_dialogs [Random.Range (0, possible_dialogs.Length - 1)], 3);
 			} 
 			else {
-				pepe.PostMessage (possible_dialogs [Random.Range (0, possible_dialogs.Length)], 3);
+				pepe.PostMessage (possible_dialogs [Random.Range (0, possible_dialogs.Length - 1)], 3);
 			}
 		}
 		return true;

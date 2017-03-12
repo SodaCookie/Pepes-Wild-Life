@@ -33,7 +33,7 @@ public class Game : MonoBehaviour {
     private GameTime lastTimedEventsExecution = new GameTime();
     private float currentEntertainment = 0;
     private float currentSuspicion = 0;
-    private float currentWealth = 1000;
+    private float currentWealth = 10000;
     private bool nightTime = true;
 
 

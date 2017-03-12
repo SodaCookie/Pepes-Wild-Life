@@ -22,7 +22,6 @@ public class WanderGoal : PepeGoal {
 
 	public override bool run(PepeBehaviour pepe) {
 		// Simply moves pepe to the goal
-		Debug.Log (Game.instance().getCurrentSuspicion());
 		if (Game.instance().getCurrentSuspicion() > 50) {
 			Debug.Log ("Increasing level");
 			Game.instance ().music.pitch = 1.25f;
